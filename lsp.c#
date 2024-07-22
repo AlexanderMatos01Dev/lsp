@@ -110,5 +110,26 @@ public class Student
 }
 
 
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Student student = new Student("John Doe");
+
+        Course onlineCourse = new OnlineCourse { CourseId = 1, Title = "Online Course 101" };
+        Course offlineCourse = new OfflineCourse { CourseId = 2, Title = "Offline Course 101" };
+        Course hybridCourse = new HybridCourse { CourseId = 3, Title = "Hybrid Course 101" };
+
+        List<Course> courses = new List<Course> { onlineCourse, offlineCourse, hybridCourse };
+
+        foreach (Course course in courses)
+        {
+            course.Subscribe(student);
+            Console.WriteLine(course.GetCourseDetails());
+        }
+    }
+}
+
+
 
 
