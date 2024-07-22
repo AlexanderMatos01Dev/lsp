@@ -1,14 +1,8 @@
-using System;
-
 public abstract class Course
 {
     public int CourseId { get; set; }
     public string Title { get; set; }
-
-    // Método abstracto para suscribir un estudiante al curso
     public abstract void Subscribe(Student std);
-
-    // Método abstracto para obtener los detalles del curso
     public abstract string GetCourseDetails();
 }
 
@@ -16,13 +10,13 @@ public class OnlineCourse : Course
 {
     public override void Subscribe(Student std)
     {
-        Console.WriteLine($"{std.Name} has been subscribed to the online course: {Title}");
-        // Lógica para suscribir a un curso en línea
+        // Lógica para suscribirse a un curso en línea
+        Console.WriteLine($"Student {std.Name} subscribed to online course {Title}");
     }
 
     public override string GetCourseDetails()
     {
-        return $"Online Course: {Title}, ID: {CourseId}";
+        return $"Online Course: {Title}, Course ID: {CourseId}";
     }
 }
 
@@ -30,13 +24,64 @@ public class OfflineCourse : Course
 {
     public override void Subscribe(Student std)
     {
-        Console.WriteLine($"{std.Name} has been subscribed to the offline course: {Title}");
-        // Lógica para suscribir a un curso presencial
+        // Lógica para suscribirse a un curso presencial
+        Console.WriteLine($"Student {std.Name} subscribed to offline course {Title}");
     }
 
     public override string GetCourseDetails()
     {
-        return $"Offline Course: {Title}, ID: {CourseId}";
+        return $"Offline Course: {Title}, Course ID: {CourseId}";
+    }
+}
+
+public class Student
+{
+    public string Name { get; set; }
+
+    public Student(string name)
+    {
+        Name = name;
+    }
+
+
+
+
+
+//implementacion
+
+public abstract class Course
+{
+    public int CourseId { get; set; }
+    public string Title { get; set; }
+    public abstract void Subscribe(Student std);
+    public abstract string GetCourseDetails();
+}
+
+public class OnlineCourse : Course
+{
+    public override void Subscribe(Student std)
+    {
+        // Lógica para suscribirse a un curso en línea
+        Console.WriteLine($"Student {std.Name} subscribed to online course {Title}");
+    }
+
+    public override string GetCourseDetails()
+    {
+        return $"Online Course: {Title}, Course ID: {CourseId}";
+    }
+}
+
+public class OfflineCourse : Course
+{
+    public override void Subscribe(Student std)
+    {
+        // Lógica para suscribirse a un curso presencial
+        Console.WriteLine($"Student {std.Name} subscribed to offline course {Title}");
+    }
+
+    public override string GetCourseDetails()
+    {
+        return $"Offline Course: {Title}, Course ID: {CourseId}";
     }
 }
 
@@ -44,59 +89,26 @@ public class HybridCourse : Course
 {
     public override void Subscribe(Student std)
     {
-        Console.WriteLine($"{std.Name} has been subscribed to the hybrid course: {Title}");
-        // Lógica para suscribir a un curso híbrido (combinación de en línea y presencial)
+        // Lógica para suscribirse a un curso híbrido
+        Console.WriteLine($"Student {std.Name} subscribed to hybrid course {Title}");
     }
 
     public override string GetCourseDetails()
     {
-        return $"Hybrid Course: {Title}, ID: {CourseId} (Online + Offline)";
+        return $"Hybrid Course: {Title}, Course ID: {CourseId}";
     }
 }
 
 public class Student
 {
-    public int StudentId { get; set; }
     public string Name { get; set; }
-}
 
-public class Program
-{
-    public static void Main(string[] args)
+    public Student(string name)
     {
-        // Crear una instancia de Student
-        Student student = new Student { StudentId = 1, Name = "John Doe" };
-
-        // Crear instancias de diferentes tipos de cursos
-        Course onlineCourse = new OnlineCourse { CourseId = 101, Title = "C# Programming" };
-        Course offlineCourse = new OfflineCourse { CourseId = 102, Title = "Data Structures" };
-        Course hybridCourse = new HybridCourse { CourseId = 103, Title = "Advanced Algorithms" };
-
-        // Suscribir al estudiante a los diferentes cursos
-        onlineCourse.Subscribe(student);
-        offlineCourse.Subscribe(student);
-        hybridCourse.Subscribe(student);
-
-        // Obtener y mostrar los detalles de los cursos
-        Console.WriteLine(onlineCourse.GetCourseDetails());
-        Console.WriteLine(offlineCourse.GetCourseDetails());
-        Console.WriteLine(hybridCourse.GetCourseDetails());
-
-        // Mensaje de confirmación
-        Console.WriteLine("Subscription successful for all courses.");
+        Name = name;
     }
 }
 
 
 
-//Explicación del Código
 
-    Clase Abstracta Course: Define la estructura básica para todos los tipos de cursos con propiedades CourseId y Title. Incluye métodos abstractos Subscribe y GetCourseDetails que deben ser implementados por las clases derivadas.
-
-    Clases OnlineCourse y OfflineCourse: Implementan los métodos Subscribe y GetCourseDetails para manejar la suscripción de estudiantes y proporcionar detalles del curso para cursos en línea y presenciales, respectivamente.
-
-    Nueva Clase HybridCourse: Hereda de Course y proporciona su propia implementación de los métodos Subscribe y GetCourseDetails para manejar la suscripción de estudiantes y proporcionar detalles del curso para cursos híbridos. Cumple con el principio de sustitución de Liskov, permitiendo que instancias de HybridCourse puedan sustituir instancias de Course sin alterar el comportamiento del programa.
-
-    Clase Student: Representa a un estudiante con propiedades StudentId y Name.
-
-    Clase Program: Contiene el método Main, donde se crean instancias de los diferentes tipos de cursos y se suscribe a un estudiante a estos cursos. También se obtienen y muestran los detalles de cada curso para verificar que todas las instancias de cursos funcionan de manera intercambiable.
